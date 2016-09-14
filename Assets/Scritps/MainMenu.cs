@@ -8,5 +8,6 @@ public class MainMenu : MonoBehaviour {
     {
         Debug.Log("Click");
         SceneManager.LoadScene("MainGame");
+        Debug.Log("Best SPJAM");
     }
 }
