@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class PlayerController : MonoBehaviour {
     private EdgeCollider2D playerCollider;
@@ -29,9 +30,10 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-<<<<<<< HEAD
-        #region Movimento/Botao direito
-=======
+
+
+        #region Movimento Nave / Mouse
+
         mousePos = Input.mousePosition; //pega posisao x e y do mouse
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
@@ -39,8 +41,53 @@ public class PlayerController : MonoBehaviour {
         float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg; // angulo de diferença
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward); // Quartenion é o Objeto de transformação em graus
         transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * turnSpeed); // gire o objeto conforme o mouse na velocidade turnSpeed
+        #endregion
 
->>>>>>> origin/master
+        if (Input.GetMouseButton(0))
+        {
+            Transform ship = transform;
+
+            //            GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>() ;
+            //            foreach (GameObject go in allObjects) {
+            //
+            //                if (go.name.Equals ("bomb")) {
+            //                    Debug.Log ( go.name,  gameObject);
+            //                    go.transform.position = new Vector3 (0, 0, 0);
+            //                }
+            //            }
+
+            var transforms = GameObject.FindGameObjectsWithTag("bomb")
+                .Select(go => go.transform)
+                .Where(tBomb => Vector3.Distance(ship.position, tBomb.position) < 6f)
+                .ToArray();
+
+            //Debug.Log ( transforms.Length.ToString(),  gameObject);
+
+            if (transforms.Length > 0)
+            {
+
+                foreach (Transform bombTransform in transforms)
+                {
+                    //.position = new Vector3 (0, 0, 0);
+                    Debug.Log("click 0", gameObject);
+                    Vector3 direction = bombTransform.position - ship.position;
+
+                    Rigidbody2D objRigid = bombTransform.GetComponent<Rigidbody2D>();
+
+                    objRigid.AddForce(5.0f * direction);
+                    
+                }
+
+            }
+
+        }
+        else
+        {
+
+        }
+
+
+        #region Movimento/Botao direito
         if (Input.GetMouseButton(1)) { //se pressionado botao direito do mouse
 
             if (!jatinho.isPlaying)
@@ -86,14 +133,17 @@ public class PlayerController : MonoBehaviour {
                 if (playerRig.velocity.x <= 0 && playerRig.velocity.y <= 0 && Vector3.Distance(transform.position, mousePos) <= 10) // caso não esteja clicando com o mouse e nave esteja parada
                     actualSpeed = 0;
 
-
             }
+            
+        }
+        #endregion
 
-            #endregion
+       
+
+
+
 
         }
-
-    }
 
 
 
