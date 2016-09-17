@@ -68,6 +68,11 @@ public class PlayerController : MonoBehaviour {
 
         }
         else{// caso não esteja clicnado com o mouse 
+            if (jatinho.isPlaying)
+            {
+                jatinhoemit.enabled = false;
+                jatinho.Stop();
+            }
             if (actualSpeed > 0) { // se velocidade atual for maior que zero
                 
                 actualSpeed -= incrementMoveSpeed; //diminui velocidade aos poucos
@@ -75,13 +80,10 @@ public class PlayerController : MonoBehaviour {
 
                 if (playerRig.velocity.x <= 0 && playerRig.velocity.y <= 0 && Vector3.Distance(transform.position, mousePos) <= 10) // caso não esteja clicando com o mouse e nave esteja parada
                     actualSpeed = 0;
-                if (jatinho.isPlaying)
-                {
-                    jatinhoemit.enabled = false;
-                    jatinho.Stop();
-                }
+
 
             }
+
         }
 	
 	}
