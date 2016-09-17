@@ -29,7 +29,18 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+<<<<<<< HEAD
         #region Movimento/Botao direito
+=======
+        mousePos = Input.mousePosition; //pega posisao x e y do mouse
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+
+        Vector3 vectorToTarget = mousePos - transform.position; //distancia da nave pro mouse
+        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg; // angulo de diferença
+        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward); // Quartenion é o Objeto de transformação em graus
+        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * turnSpeed); // gire o objeto conforme o mouse na velocidade turnSpeed
+
+>>>>>>> origin/master
         if (Input.GetMouseButton(1)) { //se pressionado botao direito do mouse
 
             if (!jatinho.isPlaying)
@@ -38,21 +49,14 @@ public class PlayerController : MonoBehaviour {
                 jatinhoemit.enabled = true;
                 jatinho.Play();
             }
+            
 
-            Debug.Log(jatinho.isPaused);
-            mousePos = Input.mousePosition; //pega posisao x e y do mouse
-            mousePos = Camera.main.ScreenToWorldPoint(mousePos); 
 
-            Vector3 vectorToTarget = mousePos - transform.position; //distancia da nave pro mouse
-            float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg; // angulo de diferença
-            Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward); // Quartenion é o Objeto de transformação em graus
-            transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * turnSpeed); // gire o objeto conforme o mouse na velocidade turnSpeed
+           
 
             if (actualSpeed < maxMoveSpeed && Vector3.Distance(transform.position, mousePos) > 10.5 ) { // Se velocidade não chegou ao maximo e mouse está numa distancia maior que 10.06
                 actualSpeed += incrementMoveSpeed; // incrementa velocidade da nave
             }
-
-
             
             transform.position = Vector2.Lerp(transform.position, mousePos, actualSpeed); // atualiza posição da nave
 
