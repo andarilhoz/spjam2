@@ -7,7 +7,9 @@ public class PlayerController : MonoBehaviour {
     private float actualSpeed = 0f;
     private Rigidbody2D playerRig;
     private Vector3 LastPosition;
+    private float speed;
 
+    public ParticleSystem jatinho;
     public float moveSpeed = 0.1f;
     public float maxMoveSpeed = 1f;
     public float turnSpeed = 1f;
@@ -19,12 +21,18 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
         playerCollider = GetComponent<EdgeCollider2D>();
         playerRig = GetComponent<Rigidbody2D>();
-	
-	}
+        if (jatinho.isPlaying)
+            jatinho.Stop();
+    }
 	
 	// Update is called once per frame
 	void Update () {
+
         if (Input.GetMouseButton(1)) { //se pressionado botao direito do mouse
+            if (jatinho.isPaused) {
+                jatinho.Play();
+             }
+            Debug.Log(jatinho.isPaused);
             mousePos = Input.mousePosition; //pega posisao x e y do mouse
             mousePos = Camera.main.ScreenToWorldPoint(mousePos); 
 
@@ -41,7 +49,7 @@ public class PlayerController : MonoBehaviour {
             
             transform.position = Vector2.Lerp(transform.position, mousePos, actualSpeed); // atualiza posição da nave
 
-            float speed = (transform.position - LastPosition).magnitude / Time.deltaTime; // pega velocidade real do objeto
+            speed = (transform.position - LastPosition).magnitude / Time.deltaTime; // pega velocidade real do objeto
             LastPosition = transform.position;
             
             if (actualSpeed > 0 && (speed <= 5 && Vector3.Distance(transform.position, mousePos) <= 10)) // caso clique e fique com o mouse parado no mesmo lugar diminui a velocidade ao chegar perto do mouse
@@ -60,6 +68,9 @@ public class PlayerController : MonoBehaviour {
 
                 if (playerRig.velocity.x <= 0 && playerRig.velocity.y <= 0 && Vector3.Distance(transform.position, mousePos) <= 10) // caso não esteja clicando com o mouse e nave esteja parada
                     actualSpeed = 0;
+                if (jatinho.isPlaying)
+                        jatinho.Stop();
+  
             }
         }
 	
