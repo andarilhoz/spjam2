@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
     private EdgeCollider2D playerCollider;
@@ -29,7 +31,8 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        #region Movimento/Botao direito
+
+        #region Movimento Nave / Mouse
 
         mousePos = Input.mousePosition; //pega posisao x e y do mouse
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -38,6 +41,10 @@ public class PlayerController : MonoBehaviour {
         float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg; // angulo de diferença
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward); // Quartenion é o Objeto de transformação em graus
         transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * turnSpeed); // gire o objeto conforme o mouse na velocidade turnSpeed
+        #endregion
+
+       
+        #region Movimento/Botao direito
 
         if (Input.GetMouseButton(1)) { //se pressionado botao direito do mouse
 
@@ -47,10 +54,7 @@ public class PlayerController : MonoBehaviour {
                 jatinhoemit.enabled = true;
                 jatinho.Play();
             }
-            
-
-
-           
+            	  
 
             if (actualSpeed < maxMoveSpeed && Vector3.Distance(transform.position, mousePos) > 10.5 ) { // Se velocidade não chegou ao maximo e mouse está numa distancia maior que 10.06
                 actualSpeed += incrementMoveSpeed; // incrementa velocidade da nave
@@ -83,15 +87,63 @@ public class PlayerController : MonoBehaviour {
 
                 if (playerRig.velocity.x <= 0 && playerRig.velocity.y <= 0 && Vector3.Distance(transform.position, mousePos) <= 10) // caso não esteja clicando com o mouse e nave esteja parada
                     actualSpeed = 0;
-
-
             }
-
-            #endregion
-
+            
         }
 
+        #endregion
+
+       
+		if (Input.GetMouseButton (0)) {
+			onClickLeftMouseButton ();
+		} 
+
     }
+
+	void onClickLeftMouseButton(){
+		List<Transform> bombsList = findBombsByNearst();
+
+		if (bombsList.Count() > 0) {
+
+			foreach (Transform bombTransform in bombsList) {
+				if (Input.GetKey (KeyCode.LeftShift)) {
+					repelBomb (bombTransform);
+				} else {
+					attractBomb (bombTransform);
+				}	
+
+			}
+
+		}
+	}
+
+	List<Transform> findBombsByNearst(){
+		return GameObject.FindGameObjectsWithTag ("bomb")
+			.Select (go => go.transform)
+			.Where (tBomb =>  Vector3.Distance(transform.position , tBomb.position) < 6f)
+			.ToList();
+		
+	}
+
+	void attractBomb(Transform bomb){
+		Vector3 offset = transform.position - bomb.position;
+
+		Rigidbody2D objRigid = bomb.GetComponent<Rigidbody2D> ();
+
+		objRigid.AddForce(0.001f * offset);
+		objRigid.velocity = Vector2.ClampMagnitude (objRigid.velocity, 0.5f);
+	
+	}
+
+	void repelBomb(Transform bomb){
+		Vector3 offset = bomb.position - transform.position;
+
+		Rigidbody2D objRigid = bomb.GetComponent<Rigidbody2D> ();
+
+		objRigid.AddForce(0.001f * offset);
+		objRigid.velocity = Vector2.ClampMagnitude (objRigid.velocity, 0.5f);
+
+	}
 
 
 
