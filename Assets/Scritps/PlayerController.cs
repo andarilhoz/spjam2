@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        #region Movimento/Botao direito
         if (Input.GetMouseButton(1)) { //se pressionado botao direito do mouse
 
             if (!jatinho.isPlaying)
@@ -67,7 +67,8 @@ public class PlayerController : MonoBehaviour {
                 actualSpeed = 0;
 
         }
-        else{// caso não esteja clicnado com o mouse 
+        else
+        {// caso não esteja clicnado com o mouse 
             if (jatinho.isPlaying)
             {
                 jatinhoemit.enabled = false;
@@ -84,9 +85,11 @@ public class PlayerController : MonoBehaviour {
 
             }
 
+            #endregion
+
         }
-	
-	}
+
+    }
 
 
 
