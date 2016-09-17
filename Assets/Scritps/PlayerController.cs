@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D playerRig;
     private Vector3 LastPosition;
     private float speed;
+    private ParticleSystem.EmissionModule jatinhoemit;
 
     public ParticleSystem jatinho;
     public float moveSpeed = 0.1f;
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
         playerCollider = GetComponent<EdgeCollider2D>();
         playerRig = GetComponent<Rigidbody2D>();
+        jatinhoemit = jatinho.emission;
         if (jatinho.isPlaying)
             jatinho.Stop();
     }
@@ -29,9 +31,14 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 
         if (Input.GetMouseButton(1)) { //se pressionado botao direito do mouse
-            if (jatinho.isPaused) {
+
+            if (!jatinho.isPlaying)
+            {
+                jatinho.Simulate(0.0f, true, true);
+                jatinhoemit.enabled = true;
                 jatinho.Play();
-             }
+            }
+
             Debug.Log(jatinho.isPaused);
             mousePos = Input.mousePosition; //pega posisao x e y do mouse
             mousePos = Camera.main.ScreenToWorldPoint(mousePos); 
@@ -69,8 +76,11 @@ public class PlayerController : MonoBehaviour {
                 if (playerRig.velocity.x <= 0 && playerRig.velocity.y <= 0 && Vector3.Distance(transform.position, mousePos) <= 10) // caso não esteja clicando com o mouse e nave esteja parada
                     actualSpeed = 0;
                 if (jatinho.isPlaying)
-                        jatinho.Stop();
-  
+                {
+                    jatinhoemit.enabled = false;
+                    jatinho.Stop();
+                }
+
             }
         }
 	
