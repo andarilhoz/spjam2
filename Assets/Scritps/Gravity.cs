@@ -23,7 +23,7 @@ public class Gravity : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "bomb")
+        if (col.gameObject.tag == "bomb" || col.gameObject.tag == "object")
         {
             GameObject obj = col.gameObject;
 

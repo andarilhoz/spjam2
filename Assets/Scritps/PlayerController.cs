@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        transform.position = new Vector3(-12, 0, 0);
         playerCollider = GetComponent<EdgeCollider2D>();
         playerRig = GetComponent<Rigidbody2D>();
         jatinhoemit = jatinho.emission;
@@ -144,6 +145,24 @@ public class PlayerController : MonoBehaviour {
 		objRigid.velocity = Vector2.ClampMagnitude (objRigid.velocity, 0.5f);
 
 	}
+
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        //foreach (ContactPoint contact in collision.contacts)
+        //{
+        //    Debug.DrawRay(contact.point, contact.normal, Color.white);
+        //}
+        //if (collision.relativeVelocity.magnitude > 2)
+
+        transform.position = new Vector3(-12,0,0);
+
+        if (collision.gameObject.tag == "goal")
+        {
+            transform.position = new Vector3(-12, 0, 0);
+        }
+
+    }
 
 
 
