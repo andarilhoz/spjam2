@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+<<<<<<< HEAD
+        #region Movimento/Botao direito
+=======
         mousePos = Input.mousePosition; //pega posisao x e y do mouse
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
@@ -37,6 +40,7 @@ public class PlayerController : MonoBehaviour {
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward); // Quartenion é o Objeto de transformação em graus
         transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * turnSpeed); // gire o objeto conforme o mouse na velocidade turnSpeed
 
+>>>>>>> origin/master
         if (Input.GetMouseButton(1)) { //se pressionado botao direito do mouse
 
             if (!jatinho.isPlaying)
@@ -67,7 +71,8 @@ public class PlayerController : MonoBehaviour {
                 actualSpeed = 0;
 
         }
-        else{// caso não esteja clicnado com o mouse 
+        else
+        {// caso não esteja clicnado com o mouse 
             if (jatinho.isPlaying)
             {
                 jatinhoemit.enabled = false;
@@ -84,9 +89,11 @@ public class PlayerController : MonoBehaviour {
 
             }
 
+            #endregion
+
         }
-	
-	}
+
+    }
 
 
 
