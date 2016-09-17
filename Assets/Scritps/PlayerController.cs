@@ -42,7 +42,6 @@ public class PlayerController : MonoBehaviour {
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward); // Quartenion é o Objeto de transformação em graus
         transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * turnSpeed); // gire o objeto conforme o mouse na velocidade turnSpeed
 
-
         if (Input.GetMouseButton(1)) { //se pressionado botao direito do mouse
 
             if (!jatinho.isPlaying)
@@ -51,10 +50,7 @@ public class PlayerController : MonoBehaviour {
                 jatinhoemit.enabled = true;
                 jatinho.Play();
             }
-            
-
-
-           
+            	  
 
             if (actualSpeed < maxMoveSpeed && Vector3.Distance(transform.position, mousePos) > 10.5 ) { // Se velocidade não chegou ao maximo e mouse está numa distancia maior que 10.06
                 actualSpeed += incrementMoveSpeed; // incrementa velocidade da nave
