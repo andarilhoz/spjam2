@@ -11,7 +11,7 @@ public class DialogController : MonoBehaviour {
     private int actualDialog = 0;
     private string text;
     private bool canChange;
-    private float lastChange;
+    public static float lastChange;
     public bool waitingForPlayer;
     public bool waitingAnimation;
     public static bool tutorial;
@@ -60,9 +60,9 @@ public class DialogController : MonoBehaviour {
     void Update() {
 
         waitingAnimation = PlayerController.animation;
-        
+        waitingForPlayer = PlayerController.fazendoTutorial;
 
-        if (waitingAnimation || waitingForPlayer)
+        if (waitingAnimation)
         {
             GameObject.Find("DialogManager").SetActive(false);
         }
@@ -73,17 +73,23 @@ public class DialogController : MonoBehaviour {
         
         if (text != "" && canChange)
         {
-            tutorial = true;
+            if (!waitingForPlayer)
+            {
+                tutorial = true;
+            }
             lastChange = Time.realtimeSinceStartup;
             canChange = false;
             text = dialogText.text;
             dialogText.text = Messages.stringList[text];
         }
-
+        
         if (Time.realtimeSinceStartup - lastChange > delayDialog) {
             if (!waitingAnimation && (actualDialog < allDialogs.Count && !waitingForPlayer))
             {
                 changeDialog();
+            }
+            else if (actualDialog >= allDialogs.Count) {
+                GameObject.Find("DialogManager").SetActive(false);
             }
         }
             
@@ -91,8 +97,18 @@ public class DialogController : MonoBehaviour {
 
     void changeDialog() {
         dialogText.text = allDialogs[actualDialog];
-        actualDialog ++;
+        switch (actualDialog) {
+            case 8: case 9: case 13: case 17:
+                tutorial = false;
+                PlayerController.fazendoTutorial = true;
+                break;
+            default:
+                
+                break;
+        }
         canChange = true;
+        actualDialog ++;
+
     }
 
 

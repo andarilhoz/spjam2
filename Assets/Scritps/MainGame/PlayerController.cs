@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
     private ParticleSystem.EmissionModule repulsaoemit;
     private bool tutorial;
     public static bool animation = true;
+    public static bool fazendoTutorial = false;
 
     public GameObject dialog;
     public ParticleSystem jatinho;
@@ -53,7 +54,7 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         tutorial = DialogController.tutorial;
-        if (animation || tutorial)
+        if (animation)
         {
 
             if (!jatinho.isPlaying)
@@ -62,9 +63,8 @@ public class PlayerController : MonoBehaviour {
                 jatinhoemit.enabled = true;
                 jatinho.Play();
             }
-            Debug.Log("Tutorial: "+ tutorial);
-            if(!tutorial)
-                transform.position = Vector2.Lerp(transform.position, new Vector3(-1, 0, 0), 0.01f);
+            
+            transform.position = Vector2.Lerp(transform.position, new Vector3(-1, 0, 0), 0.01f);
 
             if (transform.position.x >= -1.2)
             {
@@ -80,6 +80,18 @@ public class PlayerController : MonoBehaviour {
         }
         else if(!tutorial)
         {
+            #region Tutorial
+            if (fazendoTutorial)
+            {
+                Debug.Log(Time.realtimeSinceStartup - DialogController.lastChange);
+                if (Time.realtimeSinceStartup - DialogController.lastChange > 10) {
+                    fazendoTutorial = false;
+                    DialogController.tutorial = true;
+                }
+
+
+            }
+            #endregion
 
             #region Movimento Nave / Mouse
             mousePos = Input.mousePosition; //pega posisao x e y do mouse
@@ -102,8 +114,7 @@ public class PlayerController : MonoBehaviour {
                     jatinhoemit.enabled = true;
                     jatinho.Play();
                 }
-
-                Debug.Log(Vector3.Distance(transform.position, mousePos));
+                
                 if (actualSpeed < maxMoveSpeed && Vector3.Distance(transform.position, mousePos) > 2.5)
                 { // Se velocidade não chegou ao maximo e mouse está numa distancia maior que 10.06
                     actualSpeed += incrementMoveSpeed; // incrementa velocidade da nave
