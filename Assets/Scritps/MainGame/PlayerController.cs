@@ -30,12 +30,15 @@ public class PlayerController : MonoBehaviour {
     public float turnSpeed = 1f;
     public float incrementMoveSpeed = 0.001f;
 
+
+    private Vector3 posInitial;
     private AudioSource audioJet;
     private AudioSource audioIma;
 
 
     // Use this for initialization
     void Start () {
+        posInitial = transform.position;
         Debug.Log("Level: " + Application.loadedLevel);
         if(Application.loadedLevel == 1)
             transform.position = new Vector3(-12, 0, 0);
@@ -289,11 +292,11 @@ public class PlayerController : MonoBehaviour {
         //}
         //if (collision.relativeVelocity.magnitude > 2)
 
-        transform.position = new Vector3(-12,0,0);
+        transform.position = posInitial;
 
         if (collision.gameObject.tag == "goal")
         {
-            transform.position = new Vector3(-12, 0, 0);
+            transform.position = posInitial;
         }
 
     }
