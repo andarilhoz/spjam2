@@ -15,8 +15,12 @@ public class PlayerController : MonoBehaviour {
     private Vector3 LastPosition;
     private float speed;
     private ParticleSystem.EmissionModule jatinhoemit;
+    private ParticleSystem.EmissionModule atracaoemit;
+    private ParticleSystem.EmissionModule repulsaoemit;
 
     public ParticleSystem jatinho;
+    public ParticleSystem atracao;
+    public ParticleSystem repulsao;
     public float moveSpeed = 0.1f;
     public float maxMoveSpeed = 1f;
     public float turnSpeed = 1f;
@@ -31,31 +35,45 @@ public class PlayerController : MonoBehaviour {
         playerCollider = GetComponent<EdgeCollider2D>();
         playerRig = GetComponent<Rigidbody2D>();
         jatinhoemit = jatinho.emission;
-        
+        atracaoemit = atracao.emission;
+        repulsaoemit = repulsao.emission;
+
         if (jatinho.isPlaying)
             jatinho.Stop();
+        if (atracao.isPlaying)
+            atracao.Stop();
+        if (repulsao.isPlaying)
+            repulsao.Stop();
     }
 	
 	// Update is called once per frame
 	void Update () {
-       
+        
+        #region Movimento Nave / Mouse
+        mousePos = Input.mousePosition; //pega posisao x e y do mouse
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+        
+        Vector3 vectorToTarget = mousePos - transform.position; //distancia da nave pro mouse
+        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg; // angulo de diferença
+        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward); // Quartenion é o Objeto de transformação em graus
+        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * turnSpeed); // gire o objeto conforme o mouse na velocidade turnSpeed
+        
+        #endregion
 
         #region Movimento/Botao direito
 
         if (Input.GetMouseButton(1)) { //se pressionado botao direito do mouse
-
             if (!jatinho.isPlaying)
             {
                 jatinho.Simulate(0.0f, true, true);
                 jatinhoemit.enabled = true;
                 jatinho.Play();
             }
-            	  
 
+            Debug.Log(Vector3.Distance(transform.position, mousePos));
             if (actualSpeed < maxMoveSpeed && Vector3.Distance(transform.position, mousePos) > 2.5 ) { // Se velocidade não chegou ao maximo e mouse está numa distancia maior que 10.06
                 actualSpeed += incrementMoveSpeed; // incrementa velocidade da nave
             }
-            Debug.Log(actualSpeed);
             transform.position = Vector2.Lerp(transform.position, mousePos, actualSpeed); // atualiza posição da nave
 
             speed = (transform.position - LastPosition).magnitude / Time.deltaTime; // pega velocidade real do objeto
@@ -89,24 +107,54 @@ public class PlayerController : MonoBehaviour {
 
         #endregion
 
-       
-		if (Input.GetMouseButton (0)) {
-			onClickLeftMouseButton ();
-		} 
+
+        if (Input.GetMouseButton(0))
+        {
+            onClickLeftMouseButton();
+        }
+        else {
+            if (atracao.isPlaying)
+            {
+                atracaoemit.enabled = false;
+                atracao.Stop();
+            }
+            if (repulsao.isPlaying) {
+                repulsaoemit.enabled = false;
+                repulsao.Stop();
+            }
+        }
 
     }
 
 	void onClickLeftMouseButton(){
-		List<Transform> bombsList = findBombsByNearst();
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (!repulsao.isPlaying)
+            {
+                repulsao.Simulate(0.0f, true, true);
+                repulsaoemit.enabled = true;
+                repulsao.Play();
+            }
+        }
+        else
+        {
+            if (!atracao.isPlaying)
+            {
+                atracao.Simulate(0.0f, true, true);
+                atracaoemit.enabled = true;
+                atracao.Play();
+            }
+        }
+        List<Transform> bombsList = findBombsByNearst();
 
 		if (bombsList.Count() > 0) {
 
 			foreach (Transform bombTransform in bombsList) {
 				if (Input.GetKey (KeyCode.LeftShift)) {
-					repelBomb (bombTransform);
+                    repelBomb (bombTransform);
 				} else {
 					attractBomb (bombTransform);
-				}	
+                }	
 
 			}
 
