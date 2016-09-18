@@ -12,12 +12,16 @@ public class DialogController : MonoBehaviour {
     private string text;
     private bool canChange;
     private float lastChange;
+    public bool waitingForPlayer;
+    public bool waitingAnimation;
 
     // Use this for initialization
     void Start() {
         Debug.Log("teste");
-       // dialogText = dialogText.GetComponent<Text>();
+        // dialogText = dialogText.GetComponent<Text>();
 
+        waitingForPlayer = false;
+        waitingAnimation = true;
 
         allDialogs.Add("hooverCap00");
         allDialogs.Add("hooverCap01");
@@ -47,9 +51,16 @@ public class DialogController : MonoBehaviour {
 
         changeDialog();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
+        if (waitingAnimation || waitingForPlayer)
+        {
+            GameObject.Find("DialogManager").SetActive(false);
+        }
+        else {
+            GameObject.Find("DialogManager").SetActive(true);
+        }
         
         if (text != "" && canChange)
         {
@@ -61,7 +72,7 @@ public class DialogController : MonoBehaviour {
 
         if (Time.realtimeSinceStartup - lastChange > delayDialog) {
             Debug.Log(allDialogs.Count);
-            if (actualDialog < allDialogs.Count)
+            if (!waitingAnimation && (actualDialog < allDialogs.Count && !waitingForPlayer))
             {
                 changeDialog();
             }
@@ -74,4 +85,6 @@ public class DialogController : MonoBehaviour {
         actualDialog ++;
         canChange = true;
     }
+
+
 }
