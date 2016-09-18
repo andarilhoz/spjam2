@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
+using UnityEditor;
 
 public class PlayerController : MonoBehaviour
 {
@@ -47,7 +48,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         posInitial = transform.position;
-        if (Application.loadedLevel == 2)
+        if(Application.loadedLevelName == "MainGame")
             transform.position = new Vector3(-12, 0, 0);
 
         audioJet = GetComponent<AudioSource>();
@@ -70,7 +71,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         tutorial = DialogController.tutorial;
-        if (Application.loadedLevel != 2)
+        if (Application.loadedLevelName != "MainGame")
             animation = false;
 
         if (isDead)
