@@ -48,7 +48,7 @@ public class DialogController : MonoBehaviour {
         allDialogs.Add("CARA16");
         allDialogs.Add("CARA17");
         allDialogs.Add("CARA18");
-        allDialogs.Add("CARA19");
+
         changeDialog();
         tutorial = false;
         GameObject.Find("DialogManager").SetActive(false);

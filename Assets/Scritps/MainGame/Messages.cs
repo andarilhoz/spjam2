@@ -16,9 +16,10 @@ public class Messages : MonoBehaviour {
         {
 
             stringList.Add("hooverCap00", "Muito bem, jovem patrulheiro. Esta é sua primeira missão.");
-            stringList.Add("hooverCap01", "Isso aqui é para valer.");
+            stringList.Add("hooverCap01", "Isso aqui é pra valer.");
             stringList.Add("hooverCap02", "Lembre-se de seu treinamento e você triunfará sobre todos os desafios.");
             stringList.Add("hooverCap03", "Agora vamos começar.");
+
             stringList.Add("CARA01",      "Olá, eu sou Copiloto Artificial Retificador Analítico,");
             stringList.Add("CARA02",      "mas pode me chamar de C.A.R.A.. Estou aqui para te ajudar e auxiliar em sua jornada.");
             stringList.Add("CARA03",      "Vamos começar retomando o básico da navegação.");
@@ -29,47 +30,45 @@ public class Messages : MonoBehaviour {
             stringList.Add("CARA08", "Aproxime-se dele e ultilize o BOTÃO ESQUERDO do MOUSE");
             stringList.Add("CARA09", "para usar seu canhão trator.");
 
-            stringList.Add("CARA10", "O canhão trator tem uma funcionalidade que pode ser bem útil. ");
-            stringList.Add("CARA11", "Aperte alternadamente as teclas Z e X repetidamente o mais rápido que puder.");
-            stringList.Add("CARA12", "Isso irá carregar o estilingue do canhão trator.");
-            stringList.Add("CARA13", "Assim que você soltar o BOTÃO ESQUERDO do MOUSE");
-            stringList.Add("CARA14", "o canhão irá atirar o meteorito há uma velocidade incrível.");
-            stringList.Add("CARA15", "UAU! INCRÍVEL!");
-            stringList.Add("CARA16", "Você pode atrair qualquer coisa que estiver solta pelo espaço com seu canhão trator.");
-            stringList.Add("CARA17", "Pareçe que o impacto daquele meteorito criou uma rachadura no asteróide.");
-            stringList.Add("CARA18", "Estou solicitando um explosivo para a nave mãe.");
-            stringList.Add("CARA19", "Use-o para terminar de abrir o buraco no asteróide.");
+            stringList.Add("CARA10", "O canhão trator funciona de duas maneiras ");
+            stringList.Add("CARA11", "ao apertar o BOTÃO ESQUERDO do MOUSE você usa o RAIO DE ATRAÇÃO.");
+            stringList.Add("CARA12", "Você pode também usar o RAIO DE DISPERSÃO,");
+            stringList.Add("CARA13", "para isso, segure a tecla SHIFT ao clicar no BOTÃO ESQUERDO do MOUSE");
+            stringList.Add("CARA14", "UAU! INCRÍVEL!");
+            stringList.Add("CARA15", "Você pode atrair qualquer coisa que estiver solta pelo espaço com seu canhão trator.");
+            stringList.Add("CARA16", "Parece que o impacto daquele meteorito causou uma rachadura no asteróide.");
+            stringList.Add("CARA17", "Existe outro meteorito por perto.");
+            stringList.Add("CARA18", "Use-o para terminar de abrir o buraco no asteróide.");
         }
 
         //To end, I will provide a bigger example, for portuguese translation
         if (lang == SystemLanguage.English)
         {
 
-            stringList.Add("hooverCap00",  " ");
-            stringList.Add("hooverCap01",  " ");
-            stringList.Add("hooverCap02",  " ");
-            stringList.Add("hooverCap03",  " ");
-            stringList.Add("CARA01",       " ");
-            stringList.Add("CARA02",       " ");
-            stringList.Add("CARA03",       " ");
-            stringList.Add("CARA04",       " ");
-            stringList.Add("CARA05",       " ");
-            stringList.Add("CARA06",       " ");
-            stringList.Add("CARA07",       " ");
-            stringList.Add("CARA08",       " ");
-            stringList.Add("CARA09", " ");
+            stringList.Add("hooverCap00", "Right, young ranger. This is your first mission.");
+            stringList.Add("hooverCap01", "Now is for real.");
+            stringList.Add("hooverCap02", "Remember your training and you will succeed over all the challenges.");
+            stringList.Add("hooverCap03", "Let’s begin.");
 
-            stringList.Add("CARA09", " ");
-            stringList.Add("CARA10", " ");
-            stringList.Add("CARA11", " ");
-            stringList.Add("CARA12", " ");
-            stringList.Add("CARA13", " ");
-            stringList.Add("CARA14", " ");
-            stringList.Add("CARA15", " ");
-            stringList.Add("CARA16", " ");
-            stringList.Add("CARA17", " ");
-            stringList.Add("CARA18", " ");
-            stringList.Add("CARA19", " ");
+            stringList.Add("CARA01", "Hello, I am the Direction Unit Designed for Enhancement,");
+            stringList.Add("CARA02", "but you can call me D.U.D.E.. ");
+            stringList.Add("CARA03", "I’m here for support and help you in your journey.");
+            stringList.Add("CARA04", "Let’s start by remembering the navigation basics.");
+            stringList.Add("CARA05", "Use the MOUSE to indicate the direction that the X-Plorer will point to.");
+            stringList.Add("CARA06", "Use the MOUSE RIGHT BUTTON to activate the propellants. ");
+            stringList.Add("CARA07", "Well done. You’ve got the willpower.");
+            stringList.Add("CARA08", "See that meteorite over there?");
+            stringList.Add("CARA09", "Get closer to it and use the MOUSE LEFT BUTTON to use the tractor cannon.");
+
+            stringList.Add("CARA10", "The tractor cannon have two functions:");
+            stringList.Add("CARA11", "by clicking the MOUSE LEFT BUTTON you use the ATTRACTION RAY. ");
+            stringList.Add("CARA12", "You can also use the DISPERSION RAY. ");
+            stringList.Add("CARA13", "To do it, hold the SHIFT button while clicking the MOUSE LEFT BUTTON. ");
+            stringList.Add("CARA14", "WOW, FANTASTIC!");
+            stringList.Add("CARA15", "You can attract and repel anything that hangs in the space using the tractor cannon.");
+            stringList.Add("CARA16", "It looks like the impact of that meteorite made a crack in the asteroid");
+            stringList.Add("CARA17", "I’m requesting an explosive from mother-ship.");
+            stringList.Add("CARA18", "Use it to make your way through the asteroid.");
 
 
 
