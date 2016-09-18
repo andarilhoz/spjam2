@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class SetLanguage : MonoBehaviour
 {
 
-    void Awake()
-    {
-        //first we'll set "en" (english) as the default language
+
+    public void setBr() {
         Messages.SetLanguage(SystemLanguage.Portuguese);
+        SceneManager.LoadScene("MainMenu");
+    }
 
-        //if the system language isn't included in here, then the game will show the texts only in the default language
-
-        Debug.Log("Language set: " + Application.systemLanguage);
+    public void setING()
+    {
+        Messages.SetLanguage(SystemLanguage.English);
+        SceneManager.LoadScene("MainMenu");
     }
 
 }
