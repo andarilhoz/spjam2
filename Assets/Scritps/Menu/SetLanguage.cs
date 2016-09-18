@@ -8,13 +8,13 @@ public class SetLanguage : MonoBehaviour
 
     public void setBr() {
         Messages.SetLanguage(SystemLanguage.Portuguese);
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Menu");
     }
 
     public void setING()
     {
         Messages.SetLanguage(SystemLanguage.English);
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Menu");
     }
 
 }

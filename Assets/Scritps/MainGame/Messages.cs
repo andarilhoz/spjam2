@@ -60,9 +60,9 @@ public class Messages : MonoBehaviour {
             stringList.Add("CARA24", " Parece que esta parede não vai se quebrar com facilidade. Precisamos de algo mais “explosivo”.");
             
             //Fase05
-            stringList.Add("CARA24", "Estou com um mal pressentimento. Tenha cuidado.");
-            stringList.Add("CARA24", "Esse caminho está bloqueado. Precisamos achar outra passagem.");
-            stringList.Add("hooverCap08", "Muito bem, patrulheiro. Este artefato será muito útil em nossas pesquisas. Você provou o seu valor.");
+            stringList.Add("CARA25", "Estou com um mal pressentimento. Tenha cuidado.");
+            stringList.Add("CARA26", "Esse caminho está bloqueado. Precisamos achar outra passagem.");
+            stringList.Add("hooverCap09", "Muito bem, patrulheiro. Este artefato será muito útil em nossas pesquisas. Você provou o seu valor.");
 
 
         }
@@ -114,9 +114,9 @@ public class Messages : MonoBehaviour {
             stringList.Add("CARA24", "I think this wall won’t break easily. We need something more explosive.");
 
             //Fase05
-            stringList.Add("CARA24", "I have a bad feeling about this. Be careful.");
-            stringList.Add("CARA24", "This way is blocked. We have to find another path.");
-            stringList.Add("hooverCap08", "Well done, ranger. This artifact will be very useful in our research. You have proved your value.");
+            stringList.Add("CARA25", "I have a bad feeling about this. Be careful.");
+            stringList.Add("CARA26", "This way is blocked. We have to find another path.");
+            stringList.Add("hooverCap09", "Well done, ranger. This artifact will be very useful in our research. You have proved your value.");
 
 
 
