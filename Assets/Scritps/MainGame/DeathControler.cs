@@ -74,7 +74,7 @@ public class DeathControler : MonoBehaviour
     {
         isDead = false;
         isDestroied = false;
-        transform.position = new Vector3(-7, 0, 0);
+        transform.position = player.posInitial;
         player.render.sprite = player.spaceShip;
         player.render.material.SetColor("_Color", new Color(player.render.material.color.r, player.render.material.color.g, player.render.material.color.b, 1f));
     }

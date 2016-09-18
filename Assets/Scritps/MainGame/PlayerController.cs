@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
     public float incrementMoveSpeed = 0.001f;
 
 
-    private Vector3 posInitial;
+    public Vector3 posInitial;
     private AudioSource audioJet;
     private AudioSource audioIma;
 
@@ -292,13 +292,15 @@ public class PlayerController : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag != "scenario")
-            transform.position = posInitial;
+        {
+            DeathControler player = GetComponent<DeathControler>();
+            player.isDead = true;
+        }
         else if (collision.gameObject.tag == "goal")
             transform.position = posInitial;
         else
         {
-            DeathControler player = GetComponent<DeathControler>();
-            player.isDead = true;
+
         }
 
     }
