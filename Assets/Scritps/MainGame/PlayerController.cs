@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
+using UnityEditor;
 
 public class PlayerController : MonoBehaviour {
     public AudioClip jatinhoSound;
@@ -45,7 +46,8 @@ public class PlayerController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         posInitial = transform.position;
-        if(Application.loadedLevel == 2)
+        Debug.Log(Application.loadedLevelName);
+        if(Application.loadedLevelName == "MainGame")
             transform.position = new Vector3(-12, 0, 0);
         
         audioJet = GetComponent<AudioSource>();
@@ -67,7 +69,7 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         tutorial = DialogController.tutorial;
-        if (Application.loadedLevel != 2)
+        if (Application.loadedLevelName != "MainGame")
             animation = false;
             if (animation)
         {

@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Messages : MonoBehaviour {
-
+    public static SystemLanguage lingua;
     public static Dictionary<string, string> stringList = new Dictionary<string, string>();
     public static void SetLanguage(SystemLanguage lang)
     {
-
+        lingua = lang;
         stringList = new Dictionary<string, string>();
 
         //Check the chosen language ("lang"). In this case we're using 

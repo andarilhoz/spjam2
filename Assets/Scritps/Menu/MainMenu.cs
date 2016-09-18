@@ -8,4 +8,13 @@ public class MainMenu : MonoBehaviour {
     {
         SceneManager.LoadScene("MainGame");
     }
+
+    public void onButtonExit() {
+        Application.Quit();
+    }
+
+    public void onButtonCredits() {
+        SceneManager.LoadScene("Credits");
+    }
+
 }
