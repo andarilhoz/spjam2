@@ -3,7 +3,8 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
     public AudioClip jatinhoSound;
     public AudioClip imaSound;
     public AudioClip collisionSound;
@@ -35,7 +36,7 @@ public class PlayerController : MonoBehaviour {
     private AudioSource audioJet;
     private AudioSource audioIma;
 
-    private bool isDead = false;
+    public bool isDead = false;
 
     public Sprite spaceShip;
     public Sprite destroiedSpaceShip;
@@ -43,11 +44,12 @@ public class PlayerController : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         posInitial = transform.position;
-        if(Application.loadedLevel == 2)
+        if (Application.loadedLevel == 2)
             transform.position = new Vector3(-12, 0, 0);
-        
+
         audioJet = GetComponent<AudioSource>();
         playerCollider = GetComponent<EdgeCollider2D>();
         playerRig = GetComponent<Rigidbody2D>();
@@ -61,15 +63,22 @@ public class PlayerController : MonoBehaviour {
             atracao.Stop();
         if (repulsao.isPlaying)
             repulsao.Stop();
-        
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         tutorial = DialogController.tutorial;
         if (Application.loadedLevel != 2)
             animation = false;
-            if (animation)
+
+        if (isDead)
+        {
+            return;
+        }
+
+        if (animation)
         {
 
             if (!jatinho.isPlaying)
@@ -85,7 +94,7 @@ public class PlayerController : MonoBehaviour {
                 }
 
             }
-            
+
             transform.position = Vector2.Lerp(transform.position, new Vector3(-1, 0, 0), 0.01f);
 
             if (transform.position.x >= -1.2)
@@ -100,13 +109,16 @@ public class PlayerController : MonoBehaviour {
                 dialog.SetActive(true);
             }
 
+            
+
         }
-        else if(!tutorial || DialogController.tutorialEnd)
+        else if (!tutorial || DialogController.tutorialEnd)
         {
             #region Tutorial
             if (fazendoTutorial)
             {
-                if (Time.realtimeSinceStartup - DialogController.lastChange > 10) {
+                if (Time.realtimeSinceStartup - DialogController.lastChange > 10)
+                {
                     fazendoTutorial = false;
                     DialogController.tutorial = true;
                 }
@@ -141,15 +153,15 @@ public class PlayerController : MonoBehaviour {
                     jatinho.Simulate(0.0f, true, true);
                     jatinhoemit.enabled = true;
                     jatinho.Play();
-                                    if (!audioJet.isPlaying)
-                {
-                    audioJet.loop = true;
-                    audioJet.clip = jatinhoSound;
-                    audioJet.Play();
-                }
+                    if (!audioJet.isPlaying)
+                    {
+                        audioJet.loop = true;
+                        audioJet.clip = jatinhoSound;
+                        audioJet.Play();
+                    }
 
                 }
-                
+
                 if (actualSpeed < maxMoveSpeed && Vector3.Distance(transform.position, mousePos) > 2.5)
                 { // Se velocidade não chegou ao maximo e mouse está numa distancia maior que 10.06
                     actualSpeed += incrementMoveSpeed; // incrementa velocidade da nave
@@ -186,13 +198,15 @@ public class PlayerController : MonoBehaviour {
                 }
 
             }
-            if (Input.GetMouseButtonUp(1)) {
+            if (Input.GetMouseButtonUp(1))
+            {
                 audioJet.Stop();
             }
 
             #endregion
 
-            if (Input.GetMouseButtonUp(0)) {
+            if (Input.GetMouseButtonUp(0))
+            {
                 audioJet.Stop();
             }
             if (Input.GetMouseButton(0))
@@ -203,6 +217,7 @@ public class PlayerController : MonoBehaviour {
                     audioJet.loop = true;
                     audioJet.Play();
                 }
+
                 onClickLeftMouseButton();
             }
             else
@@ -222,7 +237,8 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-	void onClickLeftMouseButton(){
+    void onClickLeftMouseButton()
+    {
 
 
 
@@ -246,55 +262,70 @@ public class PlayerController : MonoBehaviour {
         }
         List<Transform> bombsList = findBombsByNearst();
 
-		if (bombsList.Count() > 0) {
+        if (bombsList.Count() > 0)
+        {
 
-			foreach (Transform bombTransform in bombsList) {
-				if (Input.GetKey (KeyCode.LeftShift)) {
-                    repelBomb (bombTransform);
-				} else {
-					attractBomb (bombTransform);
-                }	
+            foreach (Transform bombTransform in bombsList)
+            {
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    repelBomb(bombTransform);
+                }
+                else
+                {
+                    attractBomb(bombTransform);
+                }
 
-			}
+            }
 
-		}
-	}
+        }
+    }
 
-	List<Transform> findBombsByNearst(){
-		return GameObject.FindGameObjectsWithTag ("bomb")
-			.Select (go => go.transform)
-			.Where (tBomb =>  Vector3.Distance(transform.position , tBomb.position) < 6f)
-			.ToList();
-		
-	}
+    List<Transform> findBombsByNearst()
+    {
+        return GameObject.FindGameObjectsWithTag("bomb")
+            .Select(go => go.transform)
+            .Where(tBomb => Vector3.Distance(transform.position, tBomb.position) < 6f)
+            .ToList();
 
-	void attractBomb(Transform bomb){
-		Vector3 offset = transform.position - bomb.position;
+    }
 
-		Rigidbody2D objRigid = bomb.GetComponent<Rigidbody2D> ();
+    void attractBomb(Transform bomb)
+    {
+        Vector3 offset = transform.position - bomb.position;
 
-		objRigid.AddForce(0.001f * offset);
-		objRigid.velocity = Vector2.ClampMagnitude (objRigid.velocity, 0.5f);
-	
-	}
+        Rigidbody2D objRigid = bomb.GetComponent<Rigidbody2D>();
 
-	void repelBomb(Transform bomb){
-		Vector3 offset = bomb.position - transform.position;
+        objRigid.AddForce(0.001f * offset);
+        objRigid.velocity = Vector2.ClampMagnitude(objRigid.velocity, 0.5f);
 
-		Rigidbody2D objRigid = bomb.GetComponent<Rigidbody2D> ();
+    }
 
-		objRigid.AddForce(0.001f * offset);
-		objRigid.velocity = Vector2.ClampMagnitude (objRigid.velocity, 0.5f);
+    void repelBomb(Transform bomb)
+    {
+        Vector3 offset = bomb.position - transform.position;
 
-	}
+        Rigidbody2D objRigid = bomb.GetComponent<Rigidbody2D>();
+
+        objRigid.AddForce(0.001f * offset);
+        objRigid.velocity = Vector2.ClampMagnitude(objRigid.velocity, 0.5f);
+
+    }
 
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag != "scenario")
+        if (collision.gameObject.tag != "scenario" || collision.gameObject.tag != "finish")
         {
+            
             DeathControler player = GetComponent<DeathControler>();
-            player.isDead = true;
+            isDead = true;
+
+            jatinho.Stop();
+            audioJet.Stop();
+            repulsao.Stop();
+            atracao.Stop();
+            actualSpeed = 0f;
         }
         else if (collision.gameObject.tag == "goal")
             transform.position = posInitial;

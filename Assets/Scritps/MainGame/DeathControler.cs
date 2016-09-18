@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 public class DeathControler : MonoBehaviour
 {
-    public bool isDead = false;
     public bool isDestroied = false;
 
 
@@ -31,7 +30,7 @@ public class DeathControler : MonoBehaviour
     void Update()
     {
         
-        if (isDead)
+        if (player.isDead)
         {
             if (!isDestroied)
             {
@@ -72,7 +71,7 @@ public class DeathControler : MonoBehaviour
 
     void resetPlayer()
     {
-        isDead = false;
+        player.isDead = false;
         isDestroied = false;
         transform.position = player.posInitial;
         player.render.sprite = player.spaceShip;
