@@ -88,7 +88,9 @@ public class DialogController : MonoBehaviour {
             {
                 changeDialog();
             }
-            else if (actualDialog >= allDialogs.Count) {
+            else if (actualDialog > allDialogs.Count) {
+                tutorial = false;
+                PlayerController.fazendoTutorial = true;
                 GameObject.Find("DialogManager").SetActive(false);
             }
         }
@@ -98,7 +100,7 @@ public class DialogController : MonoBehaviour {
     void changeDialog() {
         dialogText.text = allDialogs[actualDialog];
         switch (actualDialog) {
-            case 8: case 9: case 13: case 17:
+            case 0:case 8: case 9: case 13: case 17:
                 tutorial = false;
                 PlayerController.fazendoTutorial = true;
                 break;

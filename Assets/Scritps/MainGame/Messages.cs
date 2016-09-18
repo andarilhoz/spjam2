@@ -20,14 +20,14 @@ public class Messages : MonoBehaviour {
             stringList.Add("hooverCap02", "Lembre-se de seu treinamento e você triunfará sobre todos os desafios.");
             stringList.Add("hooverCap03", "Agora vamos começar.");
 
-            stringList.Add("CARA01",      "Olá, eu sou Copiloto Artificial Retificador Analítico,");
+            stringList.Add("CARA01", "Olá, eu sou Copiloto Artificial Retificador Analítico,");
             stringList.Add("CARA02", "mas pode me chamar de C.A.R.A.. ");
             stringList.Add("CARA03", "Estou aqui para te ajudar e auxiliar em sua jornada.");
-            stringList.Add("CARA04",      "Vamos começar retomando o básico da navegação.");
-            stringList.Add("CARA05",      "Use o MOUSE para indicar a direção em que a X-Plorer irá apontar.");
-            stringList.Add("CARA06",      "Use o BOTÃO DIREITO do MOUSE para acionar os propulsores.");
-            stringList.Add("CARA07",      "Muito bem. A força de vontade é forte em você.");
-            stringList.Add("CARA08",      "Vê aquele meteorito alí em cima?");
+            stringList.Add("CARA04", "Vamos começar retomando o básico da navegação.");
+            stringList.Add("CARA05", "Use o MOUSE para indicar a direção em que a X-Plorer irá apontar.");
+            stringList.Add("CARA06", "Use o BOTÃO DIREITO do MOUSE para acionar os propulsores.");
+            stringList.Add("CARA07", "Muito bem. A força de vontade é forte em você.");
+            stringList.Add("CARA08", "Vê aquele meteorito alí em cima?");
             stringList.Add("CARA09", "Aproxime-se dele e ultilize o BOTÃO ESQUERDO do MOUSE");
             stringList.Add("CARA10", "para usar seu canhão trator.");
 
