@@ -35,6 +35,12 @@ public class PlayerController : MonoBehaviour {
     private AudioSource audioJet;
     private AudioSource audioIma;
 
+    private bool isDead = false;
+
+    public Sprite spaceShip;
+    public Sprite destroiedSpaceShip;
+    public SpriteRenderer render;
+
 
     // Use this for initialization
     void Start () {
@@ -285,17 +291,14 @@ public class PlayerController : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        //foreach (ContactPoint contact in collision.contacts)
-        //{
-        //    Debug.DrawRay(contact.point, contact.normal, Color.white);
-        //}
-        //if (collision.relativeVelocity.magnitude > 2)
-        if(collision.gameObject.tag !=  "scenario")
+        if (collision.gameObject.tag != "scenario")
             transform.position = posInitial;
-
-        if (collision.gameObject.tag == "goal")
+        else if (collision.gameObject.tag == "goal")
+            transform.position = posInitial;
+        else
         {
-            transform.position = posInitial;
+            DeathControler player = GetComponent<DeathControler>();
+            player.isDead = true;
         }
 
     }
