@@ -57,20 +57,20 @@ public class PlayerController : MonoBehaviour {
             }
             	  
 
-            if (actualSpeed < maxMoveSpeed && Vector3.Distance(transform.position, mousePos) > 10.5 ) { // Se velocidade não chegou ao maximo e mouse está numa distancia maior que 10.06
+            if (actualSpeed < maxMoveSpeed && Vector3.Distance(transform.position, mousePos) > 2.5 ) { // Se velocidade não chegou ao maximo e mouse está numa distancia maior que 10.06
                 actualSpeed += incrementMoveSpeed; // incrementa velocidade da nave
             }
-            
+            Debug.Log(actualSpeed);
             transform.position = Vector2.Lerp(transform.position, mousePos, actualSpeed); // atualiza posição da nave
 
             speed = (transform.position - LastPosition).magnitude / Time.deltaTime; // pega velocidade real do objeto
             LastPosition = transform.position;
-            
+
             if (actualSpeed > 0 && (speed <= 5 && Vector3.Distance(transform.position, mousePos) <= 10)) // caso clique e fique com o mouse parado no mesmo lugar diminui a velocidade ao chegar perto do mouse
             {
                 actualSpeed -= incrementMoveSpeed;
             }
-            else if (speed <= 10 && Vector3.Distance(transform.position, mousePos) <= 10.05) // se chegar muito perto do mouse zera a velocidade
+            else if (speed <= 10 && Vector3.Distance(transform.position, mousePos) <= 4.05) // se chegar muito perto do mouse zera a velocidade
                 actualSpeed = 0;
 
         }
