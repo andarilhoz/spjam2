@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour {
     void Start () {
         posInitial = transform.position;
         Debug.Log("Level: " + Application.loadedLevel);
-        if(Application.loadedLevel == 1)
+        if(Application.loadedLevel == 2)
             transform.position = new Vector3(-12, 0, 0);
         
         audioJet = GetComponent<AudioSource>();
@@ -62,7 +62,8 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         tutorial = DialogController.tutorial;
-        if (Application.loadedLevel != 1)
+        Debug.Log(Application.loadedLevel);
+        if (Application.loadedLevel != 2)
             animation = false;
             if (animation)
         {
