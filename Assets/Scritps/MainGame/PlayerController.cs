@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         posInitial = transform.position;
-        Debug.Log("Level: " + Application.loadedLevel);
         if(Application.loadedLevel == 2)
             transform.position = new Vector3(-12, 0, 0);
         
@@ -62,7 +61,6 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         tutorial = DialogController.tutorial;
-        Debug.Log(Application.loadedLevel);
         if (Application.loadedLevel != 2)
             animation = false;
             if (animation)
