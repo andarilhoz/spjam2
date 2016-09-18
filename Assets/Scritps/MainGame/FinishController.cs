@@ -18,7 +18,10 @@ public class FinishController : MonoBehaviour
 
         if (collision.gameObject.tag == "spaceship")
         {
-            SceneManager.LoadScene("Lvl01");
+            if (Application.loadedLevelName == "MainGame")
+                SceneManager.LoadScene("Lvl01");
+            else
+                SceneManager.LoadScene("Credits");
         }
 
     }

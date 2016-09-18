@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
-using UnityEditor;
+
 
 public class PlayerController : MonoBehaviour
 {
