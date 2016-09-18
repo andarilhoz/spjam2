@@ -4,6 +4,10 @@ using System.Linq;
 using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
+    public AudioClip jatinhoSound;
+    public AudioClip imaSound;
+    public AudioClip collisionSound;
+
     private EdgeCollider2D playerCollider;
     private Vector3 mousePos;
     private float actualSpeed = 0f;
@@ -18,33 +22,24 @@ public class PlayerController : MonoBehaviour {
     public float turnSpeed = 1f;
     public float incrementMoveSpeed = 0.001f;
 
-    
+    private AudioSource audio;
 
-	// Use this for initialization
-	void Start () {
-        transform.position = new Vector3(-12, 0, 0);
+    // Use this for initialization
+    void Start () {
+        //transform.position = new Vector3(-12, 0, 0);
+        audio = GetComponent<AudioSource>();
         playerCollider = GetComponent<EdgeCollider2D>();
         playerRig = GetComponent<Rigidbody2D>();
         jatinhoemit = jatinho.emission;
+        
         if (jatinho.isPlaying)
             jatinho.Stop();
     }
 	
 	// Update is called once per frame
 	void Update () {
-
-        #region Movimento Nave / Mouse
-
-        mousePos = Input.mousePosition; //pega posisao x e y do mouse
-        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-
-        Vector3 vectorToTarget = mousePos - transform.position; //distancia da nave pro mouse
-        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg; // angulo de diferença
-        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward); // Quartenion é o Objeto de transformação em graus
-        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * turnSpeed); // gire o objeto conforme o mouse na velocidade turnSpeed
-        #endregion
-
        
+
         #region Movimento/Botao direito
 
         if (Input.GetMouseButton(1)) { //se pressionado botao direito do mouse
@@ -163,7 +158,6 @@ public class PlayerController : MonoBehaviour {
         }
 
     }
-
 
 
 }
