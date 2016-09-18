@@ -15,6 +15,9 @@ public class DialogController : MonoBehaviour {
     public bool waitingForPlayer;
     public bool waitingAnimation;
     public static bool tutorial;
+    public Image perfil;
+    public Sprite General;
+    public Sprite Robot;
 
     // Use this for initialization
     void Start() {
@@ -23,6 +26,8 @@ public class DialogController : MonoBehaviour {
 
         waitingForPlayer = false;
         waitingAnimation = true;
+
+        perfil.sprite = General;
 
         allDialogs.Add("hooverCap00");
         allDialogs.Add("hooverCap01");
@@ -81,6 +86,9 @@ public class DialogController : MonoBehaviour {
             canChange = false;
             text = dialogText.text;
             dialogText.text = Messages.stringList[text];
+            Debug.Log(actualDialog);
+            if (actualDialog > 4)
+                perfil.sprite = Robot;
         }
         
         if (Time.realtimeSinceStartup - lastChange > delayDialog) {
@@ -94,7 +102,15 @@ public class DialogController : MonoBehaviour {
                 GameObject.Find("DialogManager").SetActive(false);
             }
         }
-            
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (actualDialog < allDialogs.Count)
+            {
+                changeDialog();
+            }
+        }
+
     }
 
     void changeDialog() {
@@ -112,6 +128,7 @@ public class DialogController : MonoBehaviour {
         actualDialog ++;
 
     }
+
 
 
 }

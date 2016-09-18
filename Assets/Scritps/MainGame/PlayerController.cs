@@ -36,7 +36,9 @@ public class PlayerController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        transform.position = new Vector3(-12, 0, 0);
+        Debug.Log("Level: " + Application.loadedLevel);
+        if(Application.loadedLevel == 1)
+            transform.position = new Vector3(-12, 0, 0);
         
         audioJet = GetComponent<AudioSource>();
         playerCollider = GetComponent<EdgeCollider2D>();
@@ -51,14 +53,15 @@ public class PlayerController : MonoBehaviour {
             atracao.Stop();
         if (repulsao.isPlaying)
             repulsao.Stop();
-
-        audioIma.clip = imaSound;
+        
     }
 	
 	// Update is called once per frame
 	void Update () {
         tutorial = DialogController.tutorial;
-        if (animation)
+        if (Application.loadedLevel != 1)
+            animation = false;
+            if (animation)
         {
 
             if (!jatinho.isPlaying)
