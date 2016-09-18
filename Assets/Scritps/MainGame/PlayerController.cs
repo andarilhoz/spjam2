@@ -291,8 +291,8 @@ public class PlayerController : MonoBehaviour {
         //    Debug.DrawRay(contact.point, contact.normal, Color.white);
         //}
         //if (collision.relativeVelocity.magnitude > 2)
-
-        transform.position = posInitial;
+        if(collision.gameObject.tag !=  "scenario")
+            transform.position = posInitial;
 
         if (collision.gameObject.tag == "goal")
         {
