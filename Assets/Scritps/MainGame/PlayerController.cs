@@ -17,8 +17,10 @@ public class PlayerController : MonoBehaviour {
     private ParticleSystem.EmissionModule jatinhoemit;
     private ParticleSystem.EmissionModule atracaoemit;
     private ParticleSystem.EmissionModule repulsaoemit;
-    public bool animation = true;
+    private bool tutorial;
+    public static bool animation = true;
 
+    public GameObject dialog;
     public ParticleSystem jatinho;
     public ParticleSystem atracao;
     public ParticleSystem repulsao;
@@ -50,7 +52,8 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (animation)
+        tutorial = DialogController.tutorial;
+        if (animation || tutorial)
         {
 
             if (!jatinho.isPlaying)
@@ -59,8 +62,10 @@ public class PlayerController : MonoBehaviour {
                 jatinhoemit.enabled = true;
                 jatinho.Play();
             }
+            Debug.Log("Tutorial: "+ tutorial);
+            if(!tutorial)
+                transform.position = Vector2.Lerp(transform.position, new Vector3(-1, 0, 0), 0.01f);
 
-            transform.position = Vector2.Lerp(transform.position, new Vector3(-1, 0, 0), 0.01f);
             if (transform.position.x >= -1.2)
             {
                 if (jatinho.isPlaying)
@@ -69,10 +74,11 @@ public class PlayerController : MonoBehaviour {
                     jatinho.Stop();
                 }
                 animation = false;
+                dialog.SetActive(true);
             }
 
         }
-        else
+        else if(!tutorial)
         {
 
             #region Movimento Nave / Mouse

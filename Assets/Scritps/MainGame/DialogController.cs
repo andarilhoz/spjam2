@@ -14,6 +14,7 @@ public class DialogController : MonoBehaviour {
     private float lastChange;
     public bool waitingForPlayer;
     public bool waitingAnimation;
+    public static bool tutorial;
 
     // Use this for initialization
     void Start() {
@@ -48,22 +49,31 @@ public class DialogController : MonoBehaviour {
         allDialogs.Add("CARA17");
         allDialogs.Add("CARA18");
         allDialogs.Add("CARA19");
-
         changeDialog();
+        tutorial = false;
+        GameObject.Find("DialogManager").SetActive(false);
+        
+
     }
 
     // Update is called once per frame
     void Update() {
+
+        waitingAnimation = PlayerController.animation;
+        
+
         if (waitingAnimation || waitingForPlayer)
         {
             GameObject.Find("DialogManager").SetActive(false);
         }
         else {
             GameObject.Find("DialogManager").SetActive(true);
+            
         }
         
         if (text != "" && canChange)
         {
+            tutorial = true;
             lastChange = Time.realtimeSinceStartup;
             canChange = false;
             text = dialogText.text;
@@ -71,7 +81,6 @@ public class DialogController : MonoBehaviour {
         }
 
         if (Time.realtimeSinceStartup - lastChange > delayDialog) {
-            Debug.Log(allDialogs.Count);
             if (!waitingAnimation && (actualDialog < allDialogs.Count && !waitingForPlayer))
             {
                 changeDialog();
