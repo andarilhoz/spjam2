@@ -15,6 +15,7 @@ public class DialogController : MonoBehaviour {
     public bool waitingForPlayer;
     public bool waitingAnimation;
     public static bool tutorial;
+    public static bool tutorialEnd;
     public Image perfil;
     public Sprite General;
     public Sprite Robot;
@@ -26,7 +27,7 @@ public class DialogController : MonoBehaviour {
 
         waitingForPlayer = false;
         waitingAnimation = true;
-
+        tutorialEnd = false;
         perfil.sprite = General;
 
         allDialogs.Add("hooverCap00");
@@ -98,6 +99,7 @@ public class DialogController : MonoBehaviour {
             }
             else if (actualDialog >= allDialogs.Count) {
                 tutorial = false;
+                tutorialEnd = true;
                 PlayerController.fazendoTutorial = true;
                 GameObject.Find("DialogManager").SetActive(false);
             }

@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour {
             }
 
         }
-        else if(!tutorial)
+        else if(!tutorial || DialogController.tutorialEnd)
         {
             #region Tutorial
             if (fazendoTutorial)
