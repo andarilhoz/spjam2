@@ -30,13 +30,15 @@ public class PlayerController : MonoBehaviour {
     public float turnSpeed = 1f;
     public float incrementMoveSpeed = 0.001f;
 
-    private AudioSource audio;
+    private AudioSource audioJet;
+    private AudioSource audioIma;
+
 
     // Use this for initialization
     void Start () {
         transform.position = new Vector3(-12, 0, 0);
         
-        audio = GetComponent<AudioSource>();
+        audioJet = GetComponent<AudioSource>();
         playerCollider = GetComponent<EdgeCollider2D>();
         playerRig = GetComponent<Rigidbody2D>();
         jatinhoemit = jatinho.emission;
@@ -49,6 +51,8 @@ public class PlayerController : MonoBehaviour {
             atracao.Stop();
         if (repulsao.isPlaying)
             repulsao.Stop();
+
+        audioIma.clip = imaSound;
     }
 	
 	// Update is called once per frame
@@ -62,9 +66,12 @@ public class PlayerController : MonoBehaviour {
                 jatinho.Simulate(0.0f, true, true);
                 jatinhoemit.enabled = true;
                 jatinho.Play();
-                audio.clip = jatinhoSound;
-                audio.loop = true;
-                audio.Play();
+                if (!audioJet.isPlaying)
+                {
+                    audioJet.loop = true;
+                    audioJet.clip = jatinhoSound;
+                    audioJet.Play();
+                }
 
             }
             
@@ -76,8 +83,7 @@ public class PlayerController : MonoBehaviour {
                 {
                     jatinhoemit.enabled = false;
                     jatinho.Stop();
-                    audio.enabled = false;
-                    audio.loop = false;
+                    audioJet.Stop();
                 }
                 animation = false;
                 dialog.SetActive(true);
@@ -89,7 +95,6 @@ public class PlayerController : MonoBehaviour {
             #region Tutorial
             if (fazendoTutorial)
             {
-                Debug.Log(Time.realtimeSinceStartup - DialogController.lastChange);
                 if (Time.realtimeSinceStartup - DialogController.lastChange > 10) {
                     fazendoTutorial = false;
                     DialogController.tutorial = true;
@@ -114,15 +119,23 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetMouseButton(1))
             { //se pressionado botao direito do mouse
-                audio.enabled = true;
-                audio.clip = jatinhoSound;
-                audio.loop = true;
-                audio.Play();
+                if (!audioJet.isPlaying)
+                {
+                    audioJet.loop = true;
+                    audioJet.clip = jatinhoSound;
+                    audioJet.Play();
+                }
                 if (!jatinho.isPlaying)
                 {
                     jatinho.Simulate(0.0f, true, true);
                     jatinhoemit.enabled = true;
                     jatinho.Play();
+                                    if (!audioJet.isPlaying)
+                {
+                    audioJet.loop = true;
+                    audioJet.clip = jatinhoSound;
+                    audioJet.Play();
+                }
 
                 }
                 
@@ -145,8 +158,6 @@ public class PlayerController : MonoBehaviour {
             }
             else
             {// caso não esteja clicnado com o mouse 
-                audio.enabled = false;
-                audio.loop = false;
                 if (jatinho.isPlaying)
                 {
                     jatinhoemit.enabled = false;
@@ -164,18 +175,27 @@ public class PlayerController : MonoBehaviour {
                 }
 
             }
+            if (Input.GetMouseButtonUp(1)) {
+                audioJet.Stop();
+            }
 
             #endregion
 
-
+            if (Input.GetMouseButtonUp(0)) {
+                audioJet.Stop();
+            }
             if (Input.GetMouseButton(0))
             {
+                if (!audioJet.isPlaying)
+                {
+                    audioJet.clip = imaSound;
+                    audioJet.loop = true;
+                    audioJet.Play();
+                }
                 onClickLeftMouseButton();
             }
             else
             {
-                audio.enabled = false;
-                audio.loop = false;
                 if (atracao.isPlaying)
                 {
                     atracaoemit.enabled = false;
@@ -192,10 +212,7 @@ public class PlayerController : MonoBehaviour {
     }
 
 	void onClickLeftMouseButton(){
-        audio.enabled = true;
-        audio.clip = imaSound;
-        audio.loop = true;
-        audio.Play();
+
 
 
         if (Input.GetKey(KeyCode.LeftShift))
