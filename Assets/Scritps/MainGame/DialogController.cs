@@ -15,14 +15,19 @@ public class DialogController : MonoBehaviour {
     public bool waitingForPlayer;
     public bool waitingAnimation;
     public static bool tutorial;
-    public static bool tutorialEnd;
+    public static bool tutorialEnd = false;
+    private int didTutorialTimes = 0;
     public Image perfil;
     public Sprite General;
     public Sprite Robot;
 
+    void Awake() {
+        if(didTutorialTimes > 0)
+            tutorialEnd = true;
+    }
+
     // Use this for initialization
     void Start() {
-        Debug.Log("teste");
         // dialogText = dialogText.GetComponent<Text>();
         waitingForPlayer = false;
         waitingAnimation = true;
@@ -69,11 +74,15 @@ public class DialogController : MonoBehaviour {
 
         if (waitingAnimation)
         {
-            GameObject.Find("DialogManager").SetActive(false);
+            GameObject.Find("DialogPhoto").SetActive(false);
+            GameObject.Find("DialogBackground").SetActive(false);
+            GameObject.Find("DialogText").SetActive(false);
         }
         else {
-            GameObject.Find("DialogManager").SetActive(true);
-            
+            GameObject.Find("DialogPhoto").SetActive(true);
+            GameObject.Find("DialogBackground").SetActive(true);
+            GameObject.Find("DialogText").SetActive(true);
+
         }
         
         if (text != "" && canChange)
@@ -86,7 +95,6 @@ public class DialogController : MonoBehaviour {
             canChange = false;
             text = dialogText.text;
             dialogText.text = Messages.stringList[text];
-            Debug.Log(actualDialog);
             if (actualDialog > 4)
             {
                 perfil.sprite = Robot;
@@ -101,8 +109,11 @@ public class DialogController : MonoBehaviour {
             else if (actualDialog >= allDialogs.Count) {
                 tutorial = false;
                 tutorialEnd = true;
+                didTutorialTimes++;
                 PlayerController.fazendoTutorial = true;
-                GameObject.Find("DialogManager").SetActive(false);
+                GameObject.Find("DialogPhoto").SetActive(false);
+                GameObject.Find("DialogBackground").SetActive(false);
+                GameObject.Find("DialogText").SetActive(false);
             }
         }
 

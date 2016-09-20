@@ -43,6 +43,11 @@ public class PlayerController : MonoBehaviour
     public Sprite destroiedSpaceShip;
     public SpriteRenderer render;
 
+    void Awake(){
+        animation = true;
+        fazendoTutorial = false;
+        isDead = false;
+    }
 
     // Use this for initialization
     void Start()
@@ -70,8 +75,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            
         tutorial = DialogController.tutorial;
         if (Application.loadedLevelName != "MainGame")
             animation = false;
@@ -337,6 +341,11 @@ public class PlayerController : MonoBehaviour
 
         }
 
+    }
+
+    public void restart() {
+        Application.LoadLevel(SceneManager.GetActiveScene().buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 

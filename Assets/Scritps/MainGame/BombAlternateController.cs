@@ -12,7 +12,6 @@ public class BombAlternateController : MonoBehaviour
 
     void Start() {
         particulasem = particulas.emission;
-
     }
 
     void OnCollisionEnter2D(Collision2D collision)
