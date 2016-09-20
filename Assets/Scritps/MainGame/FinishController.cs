@@ -4,19 +4,14 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(Rigidbody2D))]
 
 public class FinishController : MonoBehaviour
 {
 
-    public ParticleSystem explosion;
-
-    public SpriteRenderer render;
-
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (collision.gameObject.tag == "spaceship")
+        if (other.gameObject.tag == "spaceship")
         {
             if (Application.loadedLevelName == "MainGame")
                 SceneManager.LoadScene("Lvl01");
