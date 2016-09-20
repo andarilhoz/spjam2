@@ -19,13 +19,11 @@ public class DialogController : MonoBehaviour {
     public Image perfil;
     public Sprite General;
     public Sprite Robot;
-    public Animation roboAnimado;
 
     // Use this for initialization
     void Start() {
         Debug.Log("teste");
         // dialogText = dialogText.GetComponent<Text>();
-        roboAnimado = perfil.GetComponent<Animation>();
         waitingForPlayer = false;
         waitingAnimation = true;
         tutorialEnd = false;
@@ -92,7 +90,6 @@ public class DialogController : MonoBehaviour {
             if (actualDialog > 4)
             {
                 perfil.sprite = Robot;
-                roboAnimado.Play();
             }
         }
         
