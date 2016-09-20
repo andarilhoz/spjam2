@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
-
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -70,6 +70,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         tutorial = DialogController.tutorial;
         if (Application.loadedLevelName != "MainGame")
             animation = false;
@@ -205,7 +207,7 @@ public class PlayerController : MonoBehaviour
             }
 
             #endregion
-
+            
             if (Input.GetMouseButtonUp(0))
             {
                 audioJet.Stop();
