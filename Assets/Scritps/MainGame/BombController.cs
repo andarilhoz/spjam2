@@ -21,7 +21,7 @@ public class BombController : MonoBehaviour
             //render.material.SetColor("_Color", new Color(render.material.color.r, render.material.color.g, render.material.color.b, 0f));
             //yield return new WaitForSeconds(1f);
             //explosion.Play();
-            //Destroy(gameObject);            
+            Destroy(gameObject);            
         }        
 
     }
