@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            
+
         tutorial = DialogController.tutorial;
         if (Application.loadedLevelName != "MainGame")
             animation = false;
@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
             
 
         }
-        else if (!tutorial || DialogController.tutorialEnd)
+        else if (!tutorial || DialogController.tutorialEnd || (dialog == null || !dialog.activeSelf) )
         {
             #region Tutorial
             if (fazendoTutorial)
