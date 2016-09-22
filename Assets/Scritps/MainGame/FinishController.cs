@@ -15,6 +15,8 @@ public class FinishController : MonoBehaviour
         {
             if (Application.loadedLevelName == "MainGame")
                 SceneManager.LoadScene("Lvl01");
+            if (Application.loadedLevelName == "Lvl01")
+                SceneManager.LoadScene("Lvl02");
             else
                 SceneManager.LoadScene("Credits");
         }
