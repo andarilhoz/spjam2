@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class DialogController : MonoBehaviour {
     public Text dialogText;
     public float delayDialog;
+    public Image dialogBackground;
 
     private List<string> allDialogs = new List<string>();
     private int actualDialog = 0;
@@ -31,8 +32,11 @@ public class DialogController : MonoBehaviour {
         // dialogText = dialogText.GetComponent<Text>();
         waitingForPlayer = false;
         waitingAnimation = true;
-        tutorialEnd = false;
+        tutorialEnd = true;//tutorialEnd = false;
         perfil.sprite = General;
+        perfil.enabled = false;
+        dialogText.enabled = false;
+        dialogBackground.enabled = false;
 
         allDialogs.Add("hooverCap00");
         allDialogs.Add("hooverCap01");
