@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log(Application.loadedLevelName);
         tutorial = DialogController.tutorial;
         if (Application.loadedLevelName != "MainGame")
             animation = false;
