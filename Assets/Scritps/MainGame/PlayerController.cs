@@ -321,6 +321,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("colidiu");
         if (collision.gameObject.tag != "scenario" && collision.gameObject.tag != "finish" && collision.gameObject.tag != "barrier")
         {
             
@@ -337,7 +338,7 @@ public class PlayerController : MonoBehaviour
             transform.position = posInitial;
         else
         {
-
+            actualSpeed = 0f;
         }
 
     }
