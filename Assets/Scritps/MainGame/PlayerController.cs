@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     {
         posInitial = transform.position;
         if(Application.loadedLevelName == "MainGame")
-            transform.position = new Vector3(-12, 0, 0);
+            transform.position = new Vector3(-10, 0, 0);
 
         audioJet = GetComponent<AudioSource>();
         playerCollider = GetComponent<EdgeCollider2D>();
