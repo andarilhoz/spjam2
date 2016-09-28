@@ -321,7 +321,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag != "scenario" || collision.gameObject.tag != "finish")
+        if (collision.gameObject.tag != "scenario" && collision.gameObject.tag != "finish" && collision.gameObject.tag != "barrier")
         {
             
             DeathControler player = GetComponent<DeathControler>();
