@@ -327,7 +327,7 @@ public class PlayerController : MonoBehaviour
             
             DeathControler player = GetComponent<DeathControler>();
             isDead = true;
-
+            playerRig.velocity = Vector3.zero;
             jatinho.Stop();
             audioJet.Stop();
             repulsao.Stop();

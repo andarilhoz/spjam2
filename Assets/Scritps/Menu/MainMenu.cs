@@ -6,7 +6,7 @@ public class MainMenu : MonoBehaviour {
 
     public void onButtonNewGame()
     {
-        SceneManager.LoadScene("MainGame");
+        SceneManager.LoadScene("Tutorial");
     }
 
     public void onButtonExit() {
@@ -15,6 +15,10 @@ public class MainMenu : MonoBehaviour {
 
     public void onButtonCredits() {
         SceneManager.LoadScene("Credits");
+    }
+
+    public void onButtonGo() {
+        SceneManager.LoadScene("MainGame"); 
     }
 
 }
